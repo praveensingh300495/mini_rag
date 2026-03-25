@@ -98,8 +98,11 @@ Answer:"""
             "messages": [{"role": "user", "content": prompt}]
         }
     )
-    return response.json()["choices"][0]["message"]["content"]
-
+    result = response.json()
+    if "choices" not in result:
+        return f"⚠️ Error from LLM: {result.get('error', {}).get('message', 'Unknown error')}"
+    
+    return result["choices"][0]["message"]["content"]
 
 st.title("🏗️ Indecimal AI Assistant")
 st.caption("Ask me anything about Indecimal's packages, policies, and services.")
