@@ -27,7 +27,7 @@ This project implements a full RAG pipeline:
 |---|---|---|
 | Embedding Model | `sentence-transformers/all-MiniLM-L6-v2` | Free, fast, runs locally, no API key needed |
 | Vector Store | `FAISS` (CPU) | Lightweight, local, no managed service needed |
-| LLM | `google/gemma-3-4b-it:free` via OpenRouter | Free tier, no GPU required, good instruction following |
+| LLM | `google/gemma-3-4b-it:free`, `mistralai/mistral-small-3.1-24b-instruct:free`, `meta-llama/llama-3.2-3b-instruct:free`, `deepseek/deepseek-r1-distill-llama-8b:free` via OpenRouter | Free tier, no GPU required, multi-model fallback for reliability |
 | Frontend | `Streamlit` | Fast to build, easy to deploy, supports chat UI |
 
 ---
