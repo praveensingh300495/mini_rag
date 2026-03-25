@@ -3,7 +3,7 @@
 A Retrieval-Augmented Generation (RAG) chatbot built for Indecimal, a construction marketplace. The assistant answers user questions strictly using internal company documents — no hallucinations, no general knowledge.
 
 ##  Live Demo
-[Click here to view the deployed chatbot](https://minirag-praveen.streamlit.app/) <!-- Replace with your Streamlit Cloud URL -->
+[Click here to view the deployed chatbot](https://minirag-praveen.streamlit.app/g) <!-- Replace with your Streamlit Cloud URL -->
 
 ---
 
