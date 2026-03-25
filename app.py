@@ -87,22 +87,36 @@ Question: {query}
 
 Answer:"""
 
-    response = requests.post(
-        "https://openrouter.ai/api/v1/chat/completions",
-        headers={
-            "Authorization": f"Bearer {OPENROUTER_API_KEY}",
-            "Content-Type": "application/json"
-        },
-        json={
-            "model": "google/gemma-3-4b-it:free",
-            "messages": [{"role": "user", "content": prompt}]
-        }
-    )
-    result = response.json()
-    if "choices" not in result:
-        return f"⚠️ Error from LLM: {result.get('error', {}).get('message', 'Unknown error')}"
-    
-    return result["choices"][0]["message"]["content"]
+    # Fallback model list — tries each one until one works
+    models = [
+        "google/gemma-3-4b-it:free",
+        "mistralai/mistral-small-3.1-24b-instruct:free",
+        "meta-llama/llama-3.2-3b-instruct:free",
+        "deepseek/deepseek-r1-distill-llama-8b:free",
+    ]
+
+    for model in models:
+        try:
+            response = requests.post(
+                "https://openrouter.ai/api/v1/chat/completions",
+                headers={
+                    "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+                    "Content-Type": "application/json"
+                },
+                json={
+                    "model": model,
+                    "messages": [{"role": "user", "content": prompt}]
+                },
+                timeout=30
+            )
+            result = response.json()
+            if "choices" in result:
+                return result["choices"][0]["message"]["content"]
+        except Exception:
+            continue
+
+    return "⚠️ All models are currently rate-limited. Please try again in a moment."
+
 
 st.title("🏗️ Indecimal AI Assistant")
 st.caption("Ask me anything about Indecimal's packages, policies, and services.")
