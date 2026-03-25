@@ -3,7 +3,7 @@
 A Retrieval-Augmented Generation (RAG) chatbot built for Indecimal, a construction marketplace. The assistant answers user questions strictly using internal company documents — no hallucinations, no general knowledge.
 
 ##  Live Demo
-[Click here to view the deployed chatbot](#) <!-- Replace with your Streamlit Cloud URL -->
+[Click here to view the deployed chatbot](https://minirag-praveen.streamlit.app/) <!-- Replace with your Streamlit Cloud URL -->
 
 ---
 
@@ -107,5 +107,7 @@ This ensures the assistant never generates unsupported claims.
 - Chunking by word count (100 words) works well for these documents but can occasionally split related pricing rows across chunks, affecting retrieval precision.
 - The free LLM tier on OpenRouter may occasionally rate-limit — retrying with a different free model resolves this.
 - FAISS L2 distance works well for semantic retrieval on this document size. For larger corpora, cosine similarity or HNSW indexing would be more efficient.
+
+-The deployed app may show rate-limit errors on free OpenRouter tier during peak hours. The pipeline works correctly as demonstrated in the Jupyter notebook
 
 
